@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<script>(function(){try{var s=localStorage.getItem('spgi-theme')||'dark';document.documentElement.setAttribute('data-theme',s);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S&P Global Inc. (SPGI) — Modelo de Valorização Completo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0f1f;
+  --bg-2:#0f1629;
+  --bg-3:#141d35;
+  --bg-card:#101830;
+  --border:#1f2d4d;
+  --border-strong:#2a3d63;
+  --text:#e6ecf5;
+  --text-2:#a3b3cc;
+  --text-3:#6b7a99;
+  --gold:#fbbf24;
+  --green:#34d399;
+  --red:#f87171;
+  --blue:#60a5fa;
+  --cyan:#22d3ee;
+  --orange:#fb923c;
+  --purple:#c084fc;
+  --pink:#f472b6;
+}
+html,body{background:var(--bg);color:var(--text)}
+body{
+  font-family:'Inter','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:14px;
+  line-height:1.55;
+  font-feature-settings:'cv11','ss01','ss03';
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  letter-spacing:-0.005em;
+}
+.mono,td.num,table.mat td,table.pt td:not(:first-child):not(:nth-child(2)),.dv,.cur-price,.mv,.vc-price{
+  font-family:'JetBrains Mono','SF Mono',Consolas,monospace;
+  font-feature-settings:'tnum','zero','ss01';
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.01em;
+}
+.header{
+  background:linear-gradient(135deg,#0d1a3a 0%,#0a0f1f 100%);
+  border-bottom:1px solid var(--border);
+  padding:28px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.header h1{
+  font-size:22px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:-0.02em;
+}
+.header h1 .ticker{
+  color:var(--gold);
+  font-weight:700;
+  margin-left:10px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0;
+}
+.header p{
+  color:var(--text-3);
+  font-size:11px;
+  letter-spacing:0.08em;
+  margin-top:6px;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.header-right{text-align:right}
+.cur-price{
+  font-size:34px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:-0.02em;
+  line-height:1;
+}
+.price-label{
+  color:var(--text-3);
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:500;
+  margin-top:6px;
+}
+.summary-bar{
+  background:var(--bg-2);
+  border-bottom:1px solid var(--border);
+  padding:18px 36px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:28px;
+}
+.mc{display:flex;flex-direction:column;gap:4px}
+.ml{
+  color:var(--text-3);
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.mv{
+  font-size:16px;
+  font-weight:600;
+  color:var(--gold);
+  letter-spacing:-0.01em;
+}
+.mv.n{color:var(--text)}
+.mv.g{color:var(--green)}
+.mv.r{color:var(--red)}
+.mv.b{color:var(--blue)}
+.mv.c{color:var(--cyan)}
+.content{padding:24px 36px;max-width:1600px;margin:0 auto}
+.section{margin-bottom:36px}
+.stitle{
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:#fff;
+  padding:13px 18px;
+  border-top:2px solid var(--blue);
+  background:#0d1a3a;
+  font-weight:600;
+}
+.stitle .sub{
+  color:var(--text-3);
+  font-weight:400;
+  margin-left:12px;
+  letter-spacing:0.08em;
+  text-transform:none;
+}
+.stitle.dcf{background:#150a1f;border-top-color:var(--purple)}
+.stitle.rdcf{background:#06181d;border-top-color:var(--cyan)}
+.stitle.ratio{background:#1a0a18;border-top-color:var(--pink)}
+.stitle.peers{background:#1a1108;border-top-color:var(--orange)}
+.stitle.quality{background:#1a1a08;border-top-color:#facc15}
+.stitle.summary{background:#0d0d1f;border-top-color:#fff}
+.nb{
+  display:inline-block;
+  background:var(--bg-3);
+  border:1px solid var(--border);
+  padding:5px 11px;
+  border-radius:3px;
+  min-width:78px;
+  text-align:right;
+  color:var(--text);
+  font-size:13px;
+  font-weight:500;
+}
+.nb.go{color:var(--gold);border-color:#3a2f0e}
+.nb.gr{color:var(--green);border-color:#0e3a26}
+.nb.cy{color:var(--cyan);border-color:#0e2e3a}
+.nb.or{color:var(--orange);border-color:#3a230e}
+.nb.pu{color:var(--purple);border-color:#2a0e3a}
+.nb.re{color:var(--red);border-color:#3a0e14}
+.nb.wh{color:#fff}
+.nb.bl{color:var(--blue);border-color:#0e1f3a}
+.dcf-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:1px;
+  background:var(--border-strong);
+}
+.dcf-sc{background:var(--bg-card);padding:24px}
+.dcf-st{
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  font-weight:600;
+}
+.dcf-st.base{color:var(--blue)}
+.dcf-st.bear{color:var(--red)}
+.dcf-st.bull{color:var(--green)}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #131c33}
+.dl{
+  color:var(--text-2);
+  font-size:11px;
+  letter-spacing:0.04em;
+  font-weight:500;
+}
+.dv{font-size:13px;font-weight:600}
+.dv.go{color:var(--gold)}
+.dv.cy{color:var(--cyan)}
+.dv.gr{color:var(--green)}
+.dv.re{color:var(--red)}
+.dv.wh{color:var(--text)}
+.dv.bl{color:var(--blue)}
+.dcf-ip{
+  font-size:28px;
+  font-weight:700;
+  text-align:center;
+  margin-top:16px;
+  padding:18px;
+  background:var(--bg-3);
+  border-radius:6px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:-0.02em;
+}
+.dcf-ip.base{color:var(--blue)}
+.dcf-ip.bear{color:var(--red)}
+.dcf-ip.bull{color:var(--green)}
+.updown{
+  font-size:12px;
+  text-align:center;
+  margin-top:8px;
+  font-weight:500;
+  letter-spacing:0.04em;
+}
+.updown.up{color:var(--green)}
+.updown.dn{color:var(--red)}
+.dcf-note{
+  margin-top:14px;
+  font-size:11px;
+  color:var(--text-3);
+  line-height:1.6;
+  padding:10px 12px;
+  background:rgba(20,29,53,0.5);
+  border-radius:4px;
+  border-left:2px solid var(--border-strong);
+}
+table.mat{width:100%;border-collapse:collapse;font-size:13px}
+table.mat th{
+  background:var(--bg-3);
+  color:var(--text-3);
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:12px 16px;
+  text-align:center;
+  border:1px solid var(--border);
+  font-weight:500;
+  font-family:'Inter',sans-serif;
+}
+table.mat th:first-child{text-align:left;width:140px}
+table.mat td{
+  padding:11px 16px;
+  text-align:center;
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:500;
+}
+table.mat td:first-child{
+  text-align:left;
+  color:var(--text-2);
+  font-size:11px;
+  letter-spacing:0.06em;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+}
+table.mat td.hi{
+  background:#1a2545!important;
+  border:2px solid var(--blue)!important;
+  color:var(--gold);
+  font-weight:700;
+}
+table.mat td.lo{color:var(--red)}
+table.mat td.med{color:var(--gold)}
+table.mat td.hy{color:var(--green)}
+.ratio-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-strong)}
+.rp{background:var(--bg-card);padding:24px}
+.rp-title{
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--pink);
+  margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  font-weight:600;
+}
+.rr{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:9px 0;
+  border-bottom:1px solid #131c33;
+}
+.rl{
+  color:var(--text-2);
+  font-size:12px;
+  font-weight:500;
+}
+.rv-group{display:flex;gap:12px}
+.rv{
+  font-family:'JetBrains Mono',monospace;
+  font-feature-settings:'tnum';
+  font-size:13px;
+  text-align:right;
+  min-width:70px;
+  font-weight:500;
+}
+.rv.curr{color:var(--text)}
+.rv.hist{color:var(--blue)}
+.rv.impl{color:var(--gold);font-weight:700}
+.rh{display:flex;gap:12px;justify-content:flex-end;margin-bottom:8px}
+.rh-label{
+  font-size:9.5px;
+  color:var(--text-3);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  min-width:70px;
+  text-align:right;
+  font-weight:500;
+}
+.rp-summary{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.rp-summary-label{
+  color:var(--text-3);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  font-weight:500;
+}
+.rp-summary-val{
+  color:var(--gold);
+  font-size:18px;
+  font-weight:700;
+  font-family:'JetBrains Mono',monospace;
+}
+table.pt{width:100%;border-collapse:collapse;font-size:13px}
+table.pt th{
+  background:var(--bg-3);
+  color:var(--text-3);
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:12px 14px;
+  text-align:right;
+  border-bottom:2px solid var(--border-strong);
+  border-right:1px solid var(--border);
+  font-weight:500;
+  font-family:'Inter',sans-serif;
+}
+table.pt th:first-child,table.pt th:nth-child(2){text-align:left}
+table.pt td{
+  padding:11px 14px;
+  border-bottom:1px solid var(--border);
+  border-right:1px solid var(--border);
+  text-align:right;
+  color:var(--text);
+}
+table.pt td:first-child{
+  font-weight:600;
+  color:var(--text);
+  text-align:left;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+}
+table.pt td:nth-child(2){
+  color:var(--text-3);
+  font-size:11px;
+  text-align:left;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:500;
+  letter-spacing:0.04em;
+}
+table.pt tr.spgi td{
+  background:#1a2545;
+  color:var(--gold);
+  font-weight:600;
+}
+table.pt tr.spgi td:nth-child(2){color:var(--gold)}
+table.pt tr.med-row td{
+  background:var(--bg-3);
+  color:var(--text-3);
+  font-style:italic;
+  font-size:12px;
+  font-weight:500;
+}
+table.pt tr:not(.spgi):not(.med-row):hover td{background:#15203d}
+.val-sum{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border-strong)}
+.vc{background:var(--bg-card);padding:20px;text-align:center}
+.vc-label{
+  color:var(--text-3);
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  font-weight:500;
+}
+.vc-price{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+}
+.vc-price.base{color:var(--blue)}
+.vc-price.bear{color:var(--red)}
+.vc-price.bull{color:var(--green)}
+.vc-price.ratio{color:var(--pink)}
+.vc-price.curr{color:var(--gold)}
+.vc-method{
+  color:var(--text-3);
+  font-size:10px;
+  margin-top:6px;
+  letter-spacing:0.04em;
+}
+.vc-updown{
+  font-size:12px;
+  margin-top:6px;
+  font-weight:600;
+}
+.vc-updown.up{color:var(--green)}
+.vc-updown.dn{color:var(--red)}
+.vc-updown.n{color:var(--text-2)}
+.footer{
+  background:var(--bg-2);
+  border-top:1px solid var(--border);
+  padding:20px 36px;
+  color:var(--text-3);
+  font-size:11px;
+  line-height:1.7;
+}
+.rdcf-note{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:18px 22px;
+  margin-bottom:1px;
+  font-size:12.5px;
+  color:var(--text-2);
+  line-height:1.7;
+}
+.rdcf-note span{color:var(--gold);font-weight:600}
+.legend-row{
+  margin-top:10px;
+  font-size:11px;
+  color:var(--text-3);
+  padding:10px 0;
+  letter-spacing:0.02em;
+}
+.legend-row span.lo{color:var(--red);font-weight:600}
+.legend-row span.med{color:var(--gold);font-weight:600}
+.legend-row span.hy{color:var(--green);font-weight:600}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border-strong);margin-top:1px}
+.thesis-card{background:var(--bg-card);padding:22px}
+.thesis-title{
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  font-weight:600;
+}
+.thesis-title.up{color:var(--green)}
+.thesis-title.dn{color:var(--red)}
+.thesis-title.eq{color:var(--blue)}
+.thesis-card .body{
+  font-size:12.5px;
+  color:var(--text-2);
+  line-height:1.85;
+  font-weight:400;
+}
+.thesis-card .body strong{color:var(--gold);font-weight:600}
+.thesis-card .body .arr-up{color:var(--green);font-weight:600}
+.thesis-card .body .arr-dn{color:var(--red);font-weight:600}
+.quality-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-strong)}
+.q-card{background:var(--bg-card);padding:24px}
+.q-title{
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:#facc15;
+  margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  font-weight:600;
+}
+.q-row{
+  display:grid;
+  grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;
+  gap:12px;
+  padding:9px 0;
+  border-bottom:1px solid #131c33;
+  align-items:center;
+}
+.q-label{
+  color:var(--text-2);
+  font-size:12px;
+  font-weight:500;
+}
+.q-val{
+  font-family:'JetBrains Mono',monospace;
+  font-feature-settings:'tnum';
+  font-size:12.5px;
+  text-align:right;
+  font-weight:500;
+}
+.q-val.curr{color:var(--gold);font-weight:600}
+.q-val.bear{color:var(--red)}
+.q-val.base{color:var(--blue)}
+.q-val.bull{color:var(--green)}
+.q-val.gray{color:var(--text-3)}
+.q-head{
+  display:grid;
+  grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:8px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--border-strong);
+}
+.q-head span{
+  font-size:9.5px;
+  color:var(--text-3);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  text-align:right;
+  font-weight:600;
+}
+.q-head span:first-child{text-align:left}
+.q-curr{color:var(--gold)!important}
+.q-bear{color:var(--red)!important}
+.q-base{color:var(--blue)!important}
+.q-bull{color:var(--green)!important}
+.q-note{
+  margin-top:16px;
+  padding:12px;
+  font-size:11px;
+  color:var(--text-3);
+  line-height:1.7;
+  background:rgba(20,29,53,0.5);
+  border-radius:4px;
+  border-left:2px solid var(--border-strong);
+}
+.badge{
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:3px;
+  font-size:10px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+}
+.badge.green{background:#0e2e1f;color:var(--green);border:1px solid var(--green)}
+.badge.red{background:#2e0e14;color:var(--red);border:1px solid var(--red)}
+.badge.gold{background:#2e240e;color:var(--gold);border:1px solid var(--gold)}
+@media(max-width:1100px){
+  .dcf-grid,.thesis-grid{grid-template-columns:1fr}
+  .ratio-grid,.quality-grid{grid-template-columns:1fr}
+  .val-sum{grid-template-columns:1fr 1fr}
+}
+/* ============================================================
+   LIGHT MODE OVERRIDES (toggle via [data-theme="light"])
+   ============================================================ */
+[data-theme="light"] {
+  --bg:#f5f7fa;
+  --bg-2:#ffffff;
+  --bg-3:#f1f5f9;
+  --bg-card:#ffffff;
+  --border:#e2e8f0;
+  --border-strong:#cbd5e1;
+  --text:#0f172a;
+  --text-2:#475569;
+  --text-3:#94a3b8;
+  --brand:#1d4ed8;
+  --brand-d:#1e3a8a;
+  --brand-dark:#1e3a8a;
+  --brand-l:#dbeafe;
+  --brand-light:#dbeafe;
+  --gold:#b45309;
+  --gold-l:#fef3c7;
+  --gold-light:#fef3c7;
+  --green:#059669;
+  --green-l:#d1fae5;
+  --green-light:#d1fae5;
+  --red:#dc2626;
+  --red-l:#fee2e2;
+  --red-light:#fee2e2;
+  --blue:#1d4ed8;
+  --blue-l:#dbeafe;
+  --blue-light:#dbeafe;
+  --cyan:#0891b2;
+  --cyan-l:#cffafe;
+  --orange:#ea580c;
+  --orange-l:#fed7aa;
+  --purple:#7c3aed;
+  --purple-l:#ede9fe;
+  --pink:#db2777;
+  /* Risk severity (light mode) */
+  --c-crit:#dc2626;--c-high:#ea580c;--c-mod:#ca8a04;--c-low:#16a34a;
+  --bg-crit:#fee2e2;--bg-high:#ffedd5;--bg-mod:#fef9c3;--bg-low:#dcfce7;
+  --cell-crit:#fca5a5;--cell-high:#fdba74;--cell-mod:#fde68a;--cell-low:#86efac;
+  /* Modelo's color-* tokens (only relevant for that file) */
+  --color-bg:#f5f7fa;
+  --color-surface:#ffffff;
+  --color-surface-2:#ffffff;
+  --color-surface-offset:#f1f5f9;
+  --color-divider:#e2e8f0;
+  --color-border:#cbd5e1;
+  --color-text:#0f172a;
+  --color-text-muted:#475569;
+  --color-text-faint:#94a3b8;
+  --color-primary:#1d4ed8;
+  --color-primary-hover:#1e40af;
+  --color-primary-light:#dbeafe;
+  --color-accent-blue:#1d4ed8;
+  --color-accent-blue-light:#dbeafe;
+  --color-accent-green:#059669;
+  --color-accent-green-light:#d1fae5;
+  --color-accent-amber:#b45309;
+  --color-accent-amber-light:#fef3c7;
+  --color-accent-rose:#be123c;
+  --color-accent-rose-light:#fce7f3;
+  --color-accent-indigo:#7c3aed;
+  --color-accent-indigo-light:#ede9fe;
+  /* Legacy grey aliases (Saude) */
+  --grey-9:#0f172a;--grey-7:#475569;--grey-5:#94a3b8;--grey-3:#cbd5e1;
+  --grey-1:#f1f5f9;--grey-0:#f8fafc;
+}
+[data-theme="light"] body,
+[data-theme="light"] html { background: var(--bg); color: var(--text); }
+
+
+/* ============================================================
+   LIGHT MODE - component overrides for spgi_valuation
+   ============================================================ */
+[data-theme="light"] .header{
+  background:linear-gradient(135deg,#dbeafe 0%,#f5f7fa 100%);
+  border-bottom:1px solid var(--border);
+}
+[data-theme="light"] .header h1{color:#0f172a}
+[data-theme="light"] .stitle{color:#0f172a;background:#dbeafe}
+[data-theme="light"] .stitle.dcf{background:#ede9fe}
+[data-theme="light"] .stitle.rdcf{background:#cffafe}
+[data-theme="light"] .stitle.ratio{background:#fce7f3}
+[data-theme="light"] .stitle.peers{background:#ffedd5}
+[data-theme="light"] .stitle.quality{background:#fef3c7}
+[data-theme="light"] .stitle.summary{background:#f1f5f9;border-top-color:#0f172a}
+[data-theme="light"] .stitle .sub{color:#64748b}
+[data-theme="light"] .nb.go{border-color:#fbbf24;background:#fef3c7;color:#92400e}
+[data-theme="light"] .nb.gr{border-color:#34d399;background:#d1fae5;color:#065f46}
+[data-theme="light"] .nb.cy{border-color:#22d3ee;background:#cffafe;color:#155e75}
+[data-theme="light"] .nb.or{border-color:#fb923c;background:#fed7aa;color:#9a3412}
+[data-theme="light"] .nb.pu{border-color:#c084fc;background:#ede9fe;color:#6d28d9}
+[data-theme="light"] .nb.re{border-color:#f87171;background:#fee2e2;color:#991b1b}
+[data-theme="light"] .nb.bl{border-color:#60a5fa;background:#dbeafe;color:#1e40af}
+[data-theme="light"] .nb.wh{color:#0f172a;background:#ffffff;border-color:#cbd5e1}
+[data-theme="light"] .nb{background:#f8fafc;border-color:var(--border);color:var(--text)}
+[data-theme="light"] .dr{border-bottom-color:#e2e8f0}
+[data-theme="light"] .rr{border-bottom-color:#e2e8f0}
+[data-theme="light"] .dcf-note{background:#f8fafc;border-left-color:var(--border-strong);color:var(--text-2)}
+[data-theme="light"] .rdcf-note{background:#ffffff;border-color:var(--border);color:var(--text-2)}
+[data-theme="light"] .rdcf-note span{color:var(--blue)}
+[data-theme="light"] table.mat td.hi{background:#dbeafe!important;border:2px solid var(--blue)!important;color:#1e40af}
+[data-theme="light"] table.pt tr.spgi td{background:#dbeafe;color:#1e40af}
+[data-theme="light"] table.pt tr.spgi td:nth-child(2){color:#1e40af}
+[data-theme="light"] table.pt tr.med-row td{background:#f1f5f9;color:#64748b}
+[data-theme="light"] table.pt tr:not(.spgi):not(.med-row):hover td{background:#f1f5f9}
+[data-theme="light"] table.vt tr:hover td,[data-theme="light"] table.vt tr:hover td:first-child{background:#f1f5f9}
+[data-theme="light"] .dcf-ip{background:#f1f5f9;color:var(--text)}
+[data-theme="light"] .badge.green{background:#d1fae5;color:#065f46;border-color:#34d399}
+[data-theme="light"] .badge.red{background:#fee2e2;color:#991b1b;border-color:#f87171}
+[data-theme="light"] .badge.gold{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+[data-theme="light"] .footer{background:#ffffff;border-top:1px solid var(--border)}
+[data-theme="light"] .summary-bar{background:#ffffff;border-bottom:1px solid var(--border)}
+[data-theme="light"] .vc-price.curr{color:#b45309}
+[data-theme="light"] .dcf-st.base,[data-theme="light"] .dcf-ip.base{color:#1d4ed8}
+[data-theme="light"] .dcf-st.bear,[data-theme="light"] .dcf-ip.bear{color:#dc2626}
+[data-theme="light"] .dcf-st.bull,[data-theme="light"] .dcf-ip.bull{color:#059669}
+[data-theme="light"] .cur-price{color:#b45309}
+[data-theme="light"] .header h1 .ticker{color:#b45309}
+[data-theme="light"] .vc-price.base{color:#1d4ed8}
+[data-theme="light"] .vc-price.bear{color:#dc2626}
+[data-theme="light"] .vc-price.bull{color:#059669}
+[data-theme="light"] .vc-price.ratio{color:#db2777}
+[data-theme="light"] .thesis-title.up{color:#059669}
+[data-theme="light"] .thesis-title.dn{color:#dc2626}
+[data-theme="light"] .thesis-title.eq{color:#1d4ed8}
+[data-theme="light"] .updown.up,[data-theme="light"] .vc-updown.up{color:#059669}
+[data-theme="light"] .updown.dn,[data-theme="light"] .vc-updown.dn{color:#dc2626}
+[data-theme="light"] .rv.curr{color:#0f172a}
+[data-theme="light"] .rv.hist{color:#1d4ed8}
+[data-theme="light"] .rv.impl{color:#b45309}
+[data-theme="light"] .rp-summary-val{color:#b45309}
+[data-theme="light"] table.mat td.lo{color:#dc2626}
+[data-theme="light"] table.mat td.med{color:#b45309}
+[data-theme="light"] table.mat td.hy{color:#059669}
+[data-theme="light"] .legend-row span.lo{color:#dc2626}
+[data-theme="light"] .legend-row span.med{color:#b45309}
+[data-theme="light"] .legend-row span.hy{color:#059669}
+[data-theme="light"] .stitle.dcf{border-top-color:#7c3aed}
+[data-theme="light"] .stitle.ratio{border-top-color:#db2777}
+[data-theme="light"] .stitle.peers{border-top-color:#ea580c}
+[data-theme="light"] .stitle.quality{border-top-color:#b45309}
+[data-theme="light"] .stitle.rdcf{border-top-color:#0891b2}
+[data-theme="light"] .pillar-card,[data-theme="light"] .dcf-sc,[data-theme="light"] .rp,[data-theme="light"] .vc,[data-theme="light"] .thesis-card,[data-theme="light"] .q-card{background:#ffffff}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>S&amp;P Global Inc.<span class="ticker">SPGI</span></h1>
+    <p>Modelo de Valorização Completo · Projeções FY2026–FY2030 · USD ($M)</p>
+  </div>
+  <div class="header-right">
+    <div class="price-label">Último Fecho · NYSE</div>
+    <div class="cur-price">$505.00</div>
+    <div class="price-label">Maio 2025 · Modelo FY2025</div>
+  </div>
+</div>
+
+<!-- SUMMARY BAR -->
+<div class="summary-bar">
+  <div class="mc"><div class="ml">Cap. de Mercado</div><div class="mv">$159.6B</div></div>
+  <div class="mc"><div class="ml">Valor da Empresa</div><div class="mv">$170.6B</div></div>
+  <div class="mc"><div class="ml">Ações em Circ.</div><div class="mv n">316M</div></div>
+  <div class="mc"><div class="ml">Dívida Líquida</div><div class="mv r">$11.0B</div></div>
+  <div class="mc"><div class="ml">Receita 2025E</div><div class="mv b">$16.3B</div></div>
+  <div class="mc"><div class="ml">EBITDA 2025E</div><div class="mv b">$7.2B</div></div>
+  <div class="mc"><div class="ml">NOPAT 2025E</div><div class="mv b">$5.3B</div></div>
+  <div class="mc"><div class="ml">EPS Ajust. 2025E</div><div class="mv">$17.25</div></div>
+  <div class="mc"><div class="ml">P/L NTM</div><div class="mv n">29.3×</div></div>
+  <div class="mc"><div class="ml">EV/EBITDA</div><div class="mv n">23.7×</div></div>
+  <div class="mc"><div class="ml">EV/NOPAT</div><div class="mv n">32.2×</div></div>
+  <div class="mc"><div class="ml">Yield FCF</div><div class="mv g">3.3%</div></div>
+  <div class="mc"><div class="ml">Yield Dividendo</div><div class="mv g">0.77%</div></div>
+  <div class="mc"><div class="ml">CAGR Rec. 5A (hist)</div><div class="mv g">+11.2%</div></div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════ DCF ═══════════════ -->
+<div class="section">
+<div class="stitle dcf">Análise por Fluxos de Caixa Descontados<span class="sub">Método FCF 5 Anos + Múltiplo de Saída · Dívida Líquida deduzida para obter o Valor do Capital Próprio</span></div>
+<div class="dcf-grid">
+  <div class="dcf-sc">
+    <div class="dcf-st base">Base · WACC 8,5% · Saída 28× EV/FCF</div>
+    <div class="dr"><span class="dl">FCF 2026E</span><span class="dv wh">$5,238M</span></div>
+    <div class="dr"><span class="dl">FCF 2027E</span><span class="dv wh">$5,758M</span></div>
+    <div class="dr"><span class="dl">FCF 2028E</span><span class="dv wh">$6,322M</span></div>
+    <div class="dr"><span class="dl">FCF 2029E</span><span class="dv wh">$6,937M</span></div>
+    <div class="dr"><span class="dl">FCF 2030E</span><span class="dv wh">$7,606M</span></div>
+    <div class="dr" style="margin-top:10px"><span class="dl">Soma VP dos FCFs</span><span class="dv cy">$24,729M</span></div>
+    <div class="dr"><span class="dl">Valor Terminal (28×)</span><span class="dv cy">$212,968M</span></div>
+    <div class="dr"><span class="dl">VP do Valor Terminal</span><span class="dv cy">$141,524M</span></div>
+    <div class="dr" style="border-top:1px solid var(--border-strong);margin-top:10px;padding-top:10px"><span class="dl">Valor da Empresa</span><span class="dv go">$166,253M</span></div>
+    <div class="dr"><span class="dl">Menos: Dívida Líquida</span><span class="dv re">−$11,000M</span></div>
+    <div class="dr"><span class="dl">Valor do Capital Próprio</span><span class="dv go">$155,253M</span></div>
+    <div class="dr"><span class="dl">Ações em Circulação</span><span class="dv wh">316M</span></div>
+    <div class="dcf-ip base">$491</div>
+    <div class="updown dn">▼ −2,8% vs atual $505</div>
+    <div class="dcf-note">FCF = Resultado Líquido × conversão 95%. WACC = Rf 4,3% + PRA 4,2% × β 1,0. Saída a 28× vs média hist. 5A EV/FCF ~29×.</div>
+  </div>
+
+  <div class="dcf-sc">
+    <div class="dcf-st bear">Pessimista · WACC 9,5% · Saída 22× EV/FCF</div>
+    <div class="dr"><span class="dl">FCF 2026E</span><span class="dv wh">$4,299M</span></div>
+    <div class="dr"><span class="dl">FCF 2027E</span><span class="dv wh">$4,547M</span></div>
+    <div class="dr"><span class="dl">FCF 2028E</span><span class="dv wh">$4,805M</span></div>
+    <div class="dr"><span class="dl">FCF 2029E</span><span class="dv wh">$5,077M</span></div>
+    <div class="dr"><span class="dl">FCF 2030E</span><span class="dv wh">$5,360M</span></div>
+    <div class="dr" style="margin-top:10px"><span class="dl">Soma VP dos FCFs</span><span class="dv re">$18,316M</span></div>
+    <div class="dr"><span class="dl">Valor Terminal (22×)</span><span class="dv re">$117,920M</span></div>
+    <div class="dr"><span class="dl">VP do Valor Terminal</span><span class="dv re">$74,909M</span></div>
+    <div class="dr" style="border-top:1px solid var(--border-strong);margin-top:10px;padding-top:10px"><span class="dl">Valor da Empresa</span><span class="dv re">$93,225M</span></div>
+    <div class="dr"><span class="dl">Menos: Dívida Líquida</span><span class="dv re">−$11,500M</span></div>
+    <div class="dr"><span class="dl">Valor do Capital Próprio</span><span class="dv re">$81,725M</span></div>
+    <div class="dr"><span class="dl">Ações em Circulação</span><span class="dv wh">316M</span></div>
+    <div class="dcf-ip bear">$259</div>
+    <div class="updown dn">▼ −48,7% vs atual $505</div>
+    <div class="dcf-note">FCF = Resultado Líquido × 93%. WACC mais elevado reflete risco de compressão de margens. Saída ao nível de múltiplos recessivos.</div>
+  </div>
+
+  <div class="dcf-sc">
+    <div class="dcf-st bull">Otimista · WACC 7,5% · Saída 35× EV/FCF</div>
+    <div class="dr"><span class="dl">FCF 2026E</span><span class="dv wh">$6,410M</span></div>
+    <div class="dr"><span class="dl">FCF 2027E</span><span class="dv wh">$7,390M</span></div>
+    <div class="dr"><span class="dl">FCF 2028E</span><span class="dv wh">$8,505M</span></div>
+    <div class="dr"><span class="dl">FCF 2029E</span><span class="dv wh">$9,772M</span></div>
+    <div class="dr"><span class="dl">FCF 2030E</span><span class="dv wh">$11,211M</span></div>
+    <div class="dr" style="margin-top:10px"><span class="dl">Soma VP dos FCFs</span><span class="dv gr">$34,330M</span></div>
+    <div class="dr"><span class="dl">Valor Terminal (35×)</span><span class="dv gr">$392,385M</span></div>
+    <div class="dr"><span class="dl">VP do Valor Terminal</span><span class="dv gr">$273,285M</span></div>
+    <div class="dr" style="border-top:1px solid var(--border-strong);margin-top:10px;padding-top:10px"><span class="dl">Valor da Empresa</span><span class="dv gr">$307,615M</span></div>
+    <div class="dr"><span class="dl">Menos: Dívida Líquida</span><span class="dv re">−$10,500M</span></div>
+    <div class="dr"><span class="dl">Valor do Capital Próprio</span><span class="dv gr">$297,115M</span></div>
+    <div class="dr"><span class="dl">Ações em Circulação</span><span class="dv wh">316M</span></div>
+    <div class="dcf-ip bull">$940</div>
+    <div class="updown up">▲ +86,1% vs atual $505</div>
+    <div class="dcf-note">FCF = Resultado Líquido × 97%. WACC mais baixo reflete prémio de qualidade. Saída justificada pelo impulso de monetização de IA e dados.</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════ REVERSE DCF ═══════════════ -->
+<div class="section">
+<div class="stitle rdcf">DCF Inverso<span class="sub">CAGR de Receita Implícita Necessária para Justificar o Preço Atual de $505</span></div>
+<div class="rdcf-note">
+  Com o <span>EV atual de $170,6B</span> (preço $505 × 316M ações + $11,0B dívida líquida), o mercado está a incorporar uma expetativa de crescimento específica. A matriz abaixo mostra o <span>CAGR de receita a 5 anos necessário</span> para justificar $505 sob diferentes combinações de WACC e múltiplo de saída EV/FCF, mantendo constante a estrutura de margens do cenário base (EBIT 42,6%, conversão FCF 95%).
+</div>
+<table class="mat">
+<thead>
+<tr>
+  <th>WACC ↓ / Múlt. Saída →</th>
+  <th>EV/FCF 20×</th>
+  <th>EV/FCF 24×</th>
+  <th>EV/FCF 28× ★</th>
+  <th>EV/FCF 32×</th>
+  <th>EV/FCF 36×</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>WACC 7.0%</td><td class="lo">16.4%</td><td class="med">12.8%</td><td class="med">10.0%</td><td class="hy">7.8%</td><td class="hy">5.9%</td></tr>
+<tr><td>WACC 7.5%</td><td class="lo">17.5%</td><td class="lo">13.7%</td><td class="med">10.8%</td><td class="med">8.5%</td><td class="hy">6.5%</td></tr>
+<tr><td>WACC 8.0%</td><td class="lo">18.7%</td><td class="lo">14.6%</td><td class="med">11.5%</td><td class="med">9.1%</td><td class="hy">7.0%</td></tr>
+<tr><td>WACC 8.5% ★</td><td class="lo">20.0%</td><td class="lo">15.6%</td><td class="hi">12.4%</td><td class="med">9.8%</td><td class="hy">7.6%</td></tr>
+<tr><td>WACC 9.0%</td><td class="lo">21.4%</td><td class="lo">16.7%</td><td class="lo">13.3%</td><td class="med">10.6%</td><td class="med">8.2%</td></tr>
+<tr><td>WACC 9.5%</td><td class="lo">22.9%</td><td class="lo">17.9%</td><td class="lo">14.3%</td><td class="lo">11.4%</td><td class="med">8.9%</td></tr>
+<tr><td>WACC 10.0%</td><td class="lo">24.5%</td><td class="lo">19.1%</td><td class="lo">15.3%</td><td class="lo">12.2%</td><td class="med">9.5%</td></tr>
+</tbody>
+</table>
+<div class="legend-row">
+  ★ Âncora cenário base (WACC 8,5%, saída 28×, CAGR implícito ~12,4%) ·
+  <span class="lo">Vermelho &gt;15%</span> = agressivo ·
+  <span class="med">Âmbar 8–15%</span> = exigente/alcançável ·
+  <span class="hy">Verde &lt;8%</span> = conservador ·
+  Estimativa consenso CAGR receita 5A: ~8–10%.
+</div>
+</div>
+
+<!-- ═══════════════ QUALITY METRICS ═══════════════ -->
+<div class="section">
+<div class="stitle quality">Retornos de Capital &amp; Métricas de Qualidade<span class="sub">ROIC · Rentabilidade com base no NOPAT · Regra dos 40 · Eficiência de Capital</span></div>
+<div class="quality-grid">
+
+  <div class="q-card">
+    <div class="q-title">Retorno sobre o Capital Investido (ROIC)</div>
+    <div class="q-head">
+      <span>Métrica</span>
+      <span class="q-curr">2025E</span>
+      <span class="q-bear">Pessimista 2030E</span>
+      <span class="q-base">Base 2030E</span>
+      <span class="q-bull">Otimista 2030E</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">NOPAT ($M)</span>
+      <span class="q-val curr">5,304</span>
+      <span class="q-val bear">6,087</span>
+      <span class="q-val base">8,334</span>
+      <span class="q-val bull">11,826</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Capital Investido ($B, contab.)</span>
+      <span class="q-val curr">43.0</span>
+      <span class="q-val bear">46.5</span>
+      <span class="q-val base">50.4</span>
+      <span class="q-val bull">53.8</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">ROIC (contabilístico) %</span>
+      <span class="q-val curr">12.3%</span>
+      <span class="q-val bear">13.1%</span>
+      <span class="q-val base">16.5%</span>
+      <span class="q-val bull">22.0%</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">ROIC ex-Goodwill %</span>
+      <span class="q-val curr">~96%</span>
+      <span class="q-val gray">NM*</span>
+      <span class="q-val gray">NM*</span>
+      <span class="q-val gray">NM*</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">WACC %</span>
+      <span class="q-val curr">8.5%</span>
+      <span class="q-val bear">9.5%</span>
+      <span class="q-val base">8.5%</span>
+      <span class="q-val bull">7.5%</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Spread ROIC − WACC (contab.)</span>
+      <span class="q-val curr">+3.8pp</span>
+      <span class="q-val bear">+3.6pp</span>
+      <span class="q-val base">+8.0pp</span>
+      <span class="q-val bull">+14.5pp</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Lucro Económico ($M)</span>
+      <span class="q-val curr">1,649</span>
+      <span class="q-val bear">1,675</span>
+      <span class="q-val base">4,032</span>
+      <span class="q-val bull">7,801</span>
+    </div>
+    <div class="q-note">
+      <strong style="color:var(--gold)">*Valor contabilístico tangível negativo</strong> derivado do goodwill IHS Markit de $47B — o ROIC ex-goodwill é essencialmente indefinido para a SPGI, mas sobre o capital operacional (AFT + FM + intangíveis tangíveis ~$5,5B) os retornos excedem 95%, refletindo a franquia asset-light de dados e ratings. Lucro Económico = (ROIC − WACC) × Capital Investido. <strong>CAGR do lucro económico a 5 anos (cenário base) ≈ 19,6%</strong>.
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-title">Qualidade Operacional &amp; Geração de Caixa</div>
+    <div class="q-head">
+      <span>Métrica</span>
+      <span class="q-curr">2025E</span>
+      <span class="q-bear">Pessimista 2030E</span>
+      <span class="q-base">Base 2030E</span>
+      <span class="q-bull">Otimista 2030E</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">NOPAT Margin %</span>
+      <span class="q-val curr">32.5%</span>
+      <span class="q-val bear">29.3%</span>
+      <span class="q-val base">33.2%</span>
+      <span class="q-val bull">37.7%</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Conversão FCF (FCF/RL) %</span>
+      <span class="q-val curr">98%</span>
+      <span class="q-val bear">93%</span>
+      <span class="q-val base">95%</span>
+      <span class="q-val bull">97%</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Regra dos 40 (Rec% + FCF%)</span>
+      <span class="q-val curr">42</span>
+      <span class="q-val bear">31</span>
+      <span class="q-val base">39</span>
+      <span class="q-val bull">50</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Margem EBITDA %</span>
+      <span class="q-val curr">44.2%</span>
+      <span class="q-val bear">40.5%</span>
+      <span class="q-val base">45.0%</span>
+      <span class="q-val bull">50.0%</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Cobertura de Juros (EBIT/Jur.)</span>
+      <span class="q-val curr">13.6×</span>
+      <span class="q-val bear">18.8×</span>
+      <span class="q-val base">25.4×</span>
+      <span class="q-val bull">44.0×</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Dívida Líquida / EBITDA</span>
+      <span class="q-val curr">1.5×</span>
+      <span class="q-val bear">1.3×</span>
+      <span class="q-val base">0.6×</span>
+      <span class="q-val bull">0.3×</span>
+    </div>
+    <div class="q-row">
+      <span class="q-label">Receita Recorrente %</span>
+      <span class="q-val curr">~76%</span>
+      <span class="q-val bear">~74%</span>
+      <span class="q-val base">~78%</span>
+      <span class="q-val bull">~82%</span>
+    </div>
+    <div class="q-note">
+      <strong style="color:var(--gold)">Regra dos 40</strong> é um referencial para negócios SaaS/dados (qualquer valor &gt; 40 é excelente). A base de receita recorrente de 76%+ da SPGI, combinada com os duopólios de Índices e Ratings, impulsiona a eficiência de capital de topo de setor. <strong>Conversão de caixa acima de 95%</strong> reflete necessidades mínimas de capex (~$300M/ano sobre ~$16B de receita = 1,8%). Dívida líquida/EBITDA decresce rapidamente com o FCF retido em todos os cenários.
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════ RATIO VALUATION ═══════════════ -->
+<div class="section">
+<div class="stitle ratio">Valorização por Múltiplos<span class="sub">Múltiplos Atuais vs. Médias Hist. 5A · Ano Base 2025E · Preço-Alvo Implícito</span></div>
+<div class="ratio-grid">
+
+  <div class="rp">
+    <div class="rp-title">Múltiplos de Resultados, Fluxo de Caixa &amp; NOPAT</div>
+    <div class="rh">
+      <span class="rh-label">Atual</span>
+      <span class="rh-label">Méd. 5A</span>
+      <span class="rh-label">Impl. $</span>
+    </div>
+    <div class="rr"><span class="rl">P/L (NTM EPS Ajust. $17,25)</span><div class="rv-group"><span class="rv curr">29.3×</span><span class="rv hist">33.0×</span><span class="rv impl">$569</span></div></div>
+    <div class="rr"><span class="rl">P/FCF (NTM FCF/ação $16,46)</span><div class="rv-group"><span class="rv curr">30.7×</span><span class="rv hist">29.0×</span><span class="rv impl">$477</span></div></div>
+    <div class="rr"><span class="rl">EV/NOPAT (NOPAT 2025E $5,3B)</span><div class="rv-group"><span class="rv curr">32.2×</span><span class="rv hist">33.5×</span><span class="rv impl">$527</span></div></div>
+    <div class="rr"><span class="rl">Yield NOPAT (NOPAT / EV)</span><div class="rv-group"><span class="rv curr">3.11%</span><span class="rv hist">2.99%</span><span class="rv impl">$522</span></div></div>
+    <div class="rr"><span class="rl">EV/EBIT (EBIT 2025E $6,8B)</span><div class="rv-group"><span class="rv curr">25.1×</span><span class="rv hist">28.0×</span><span class="rv impl">$556</span></div></div>
+    <div class="rr"><span class="rl">EV/EBITDA (EBITDA 2025E $7,2B)</span><div class="rv-group"><span class="rv curr">23.7×</span><span class="rv hist">26.0×</span><span class="rv impl">$557</span></div></div>
+    <div class="rr"><span class="rl">PEG (P/L ÷ Cresc. EPS 9%)</span><div class="rv-group"><span class="rv curr">3.26×</span><span class="rv hist">3.66×</span><span class="rv impl" style="color:var(--text-3)">—</span></div></div>
+    <div class="rr"><span class="rl">Yield Resultados + ROIC <span style="color:var(--text-3);font-size:10px">(Greenblatt)</span></span><div class="rv-group"><span class="rv curr">15.4%</span><span class="rv hist">15.1%</span><span class="rv impl" style="color:var(--text-3)">—</span></div></div>
+    <div class="rp-summary">
+      <span class="rp-summary-label">Preço Impl. Médio (Resultados/NOPAT)</span>
+      <span class="rp-summary-val">$535</span>
+    </div>
+    <div style="font-size:10.5px;color:var(--text-3);margin-top:6px;text-align:right;letter-spacing:0.04em">+5,9% vs atual $505</div>
+  </div>
+
+  <div class="rp">
+    <div class="rp-title">Múltiplos de Receita, Valor da Empresa &amp; Yield</div>
+    <div class="rh">
+      <span class="rh-label">Atual</span>
+      <span class="rh-label">Méd. 5A</span>
+      <span class="rh-label">Impl. $</span>
+    </div>
+    <div class="rr"><span class="rl">EV/Receita (2025E $16,3B)</span><div class="rv-group"><span class="rv curr">10.5×</span><span class="rv hist">12.0×</span><span class="rv impl">$584</span></div></div>
+    <div class="rr"><span class="rl">P/Vendas (2025E $16,3B)</span><div class="rv-group"><span class="rv curr">9.8×</span><span class="rv hist">11.0×</span><span class="rv impl">$567</span></div></div>
+    <div class="rr"><span class="rl">EV/Lucro Bruto (2025E $10,3B)</span><div class="rv-group"><span class="rv curr">16.6×</span><span class="rv hist">19.0×</span><span class="rv impl">$583</span></div></div>
+    <div class="rr"><span class="rl">EV/Rec. Recorrente (~76% do total)</span><div class="rv-group"><span class="rv curr">13.8×</span><span class="rv hist">15.5×</span><span class="rv impl">$564</span></div></div>
+    <div class="rr"><span class="rl">Yield FCF (NTM FCF/ação ÷ Preço)</span><div class="rv-group"><span class="rv curr">3.26%</span><span class="rv hist">3.45%</span><span class="rv impl">$477</span></div></div>
+    <div class="rr"><span class="rl">Yield Dividendo (anual $3,88/ação)</span><div class="rv-group"><span class="rv curr">0.77%</span><span class="rv hist">0.83%</span><span class="rv impl" style="color:var(--text-3)">—</span></div></div>
+    <div class="rr"><span class="rl">P/VCA (aj. goodwill)</span><div class="rv-group"><span class="rv curr">NM</span><span class="rv hist">NM</span><span class="rv impl" style="color:var(--text-3)">N/A</span></div></div>
+    <div class="rr"><span class="rl">Preço / Valor Contab. Tangível</span><div class="rv-group"><span class="rv curr">NM</span><span class="rv hist">NM</span><span class="rv impl" style="color:var(--text-3)">N/A</span></div></div>
+    <div class="rp-summary">
+      <span class="rp-summary-label">Preço Impl. Médio (Receita/EV)</span>
+      <span class="rp-summary-val">$555</span>
+    </div>
+    <div style="font-size:10.5px;color:var(--text-3);margin-top:6px;text-align:right;letter-spacing:0.04em">+9,9% vs atual $505 · VCA tangível negativo pelo goodwill IHS Markit</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════ PEER COMPS ═══════════════ -->
+<div class="section">
+<div class="stitle peers">Análise de Empresas Comparáveis<span class="sub">Setor de Dados Financeiros &amp; Análise · Estimativas NTM · Prémio/Desconto vs Pares</span></div>
+<table class="pt">
+<thead>
+<tr>
+  <th>Empresa</th>
+  <th>Ticker</th>
+  <th>Cap. Merc.</th>
+  <th>EV/Rec.</th>
+  <th>EV/EBITDA</th>
+  <th>EV/NOPAT</th>
+  <th>P/L NTM</th>
+  <th>P/FCF</th>
+  <th>PEG</th>
+  <th>ROIC</th>
+  <th>Cresc. Rec.</th>
+  <th>Marg. EBITDA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="spgi">
+  <td>S&amp;P Global</td><td>SPGI</td>
+  <td>$159.6B</td><td>10.5×</td><td>23.7×</td><td>32.2×</td><td>29.3×</td><td>30.7×</td><td>3.3×</td>
+  <td>12.3%</td><td>+9%E</td><td>44.2%</td>
+</tr>
+<tr><td>Moody's Corp</td><td>MCO</td>
+  <td>$75.8B</td><td>11.3×</td><td>22.1×</td><td>30.8×</td><td>30.4×</td><td>29.5×</td><td>3.2×</td>
+  <td>15.2%</td><td>+8%E</td><td>43.8%</td></tr>
+<tr><td>MSCI Inc</td><td>MSCI</td>
+  <td>$39.2B</td><td>16.9×</td><td>31.8×</td><td>43.5×</td><td>43.2×</td><td>41.0×</td><td>3.6×</td>
+  <td>22.8%</td><td>+12%E</td><td>55.1%</td></tr>
+<tr><td>FactSet Research</td><td>FDS</td>
+  <td>$16.2B</td><td>8.5×</td><td>19.5×</td><td>27.3×</td><td>27.8×</td><td>27.2×</td><td>5.6×</td>
+  <td>16.4%</td><td>+5%E</td><td>38.2%</td></tr>
+<tr><td>Verisk Analytics</td><td>VRSK</td>
+  <td>$38.4B</td><td>13.1×</td><td>27.4×</td><td>37.6×</td><td>34.5×</td><td>33.8×</td><td>4.9×</td>
+  <td>18.7%</td><td>+7%E</td><td>51.6%</td></tr>
+<tr><td>ICE (Intercontinental)</td><td>ICE</td>
+  <td>$92.0B</td><td>8.1×</td><td>18.3×</td><td>26.5×</td><td>24.1×</td><td>25.8×</td><td>4.0×</td>
+  <td>9.4%</td><td>+6%E</td><td>40.7%</td></tr>
+<tr><td>London Stock Exch.</td><td>LSEG</td>
+  <td>$58.3B</td><td>7.2×</td><td>16.8×</td><td>24.4×</td><td>22.4×</td><td>23.1×</td><td>4.5×</td>
+  <td>8.1%</td><td>+7%E</td><td>39.8%</td></tr>
+<tr class="med-row">
+  <td>Mediana Setor</td><td>—</td>
+  <td>—</td><td>10.5×</td><td>22.1×</td><td>30.8×</td><td>29.3×</td><td>29.5×</td><td>4.0×</td>
+  <td>15.2%</td><td>+7%E</td><td>43.3%</td></tr>
+</tbody>
+</table>
+<div class="dcf-note" style="margin-top:14px">
+  A SPGI negocia aproximadamente <strong style="color:var(--gold)">em linha com a Moody's</strong> na maioria dos múltiplos — adequado dada a estrutura de duopólio no mercado de ratings. A <strong style="color:var(--gold)">MSCI detém um prémio estrutural</strong> devido à margem EBITDA mais elevada (55%) e ~99% de receita por subscrição. O <strong style="color:var(--gold)">EV/NOPAT da SPGI (32,2×) situa-se a um ligeiro desconto face à mediana dos pares (30,8×)</strong>, sugerindo potencial de reavaliação moderado caso as margens do Market Intelligence continuem a expandir. ICE e LSEG negoceiam a múltiplos de negócio de bolsa, inferiores aos pares de dados/ratings.
+</div>
+</div>
+
+<!-- ═══════════════ VALUATION SUMMARY ═══════════════ -->
+<div class="section">
+<div class="stitle summary">Resumo de Valorização<span class="sub">Intervalo de Preço Implícito por Método · Tese de Investimento</span></div>
+<div class="val-sum">
+  <div class="vc">
+    <div class="vc-label">Preço Atual</div>
+    <div class="vc-price curr">$505</div>
+    <div class="vc-method">NYSE · Maio 2025</div>
+    <div class="vc-updown n">Referência</div>
+  </div>
+  <div class="vc">
+    <div class="vc-label">DCF Cenário Base</div>
+    <div class="vc-price base">$491</div>
+    <div class="vc-method">WACC 8,5% · Saída 28×</div>
+    <div class="vc-updown dn">▼ −2,8%</div>
+  </div>
+  <div class="vc">
+    <div class="vc-label">Múlt. Impl. Médio</div>
+    <div class="vc-price ratio">$545</div>
+    <div class="vc-method">P/L · EV/EBITDA · EV/NOPAT</div>
+    <div class="vc-updown up">▲ +7,9%</div>
+  </div>
+  <div class="vc">
+    <div class="vc-label">Cenário Pessimista (2030)</div>
+    <div class="vc-price bear">$368 – $471</div>
+    <div class="vc-method">CAGR 5% · P/L 25–32×</div>
+    <div class="vc-updown dn">▼ −27% / −7%</div>
+  </div>
+  <div class="vc">
+    <div class="vc-label">Cenário Otimista (2030)</div>
+    <div class="vc-price bull">$901 – $1,740</div>
+    <div class="vc-method">CAGR 14% · P/L 30–42×</div>
+    <div class="vc-updown up">▲ +78% / +245%</div>
+  </div>
+</div>
+
+<div class="thesis-grid">
+  <div class="thesis-card">
+    <div class="thesis-title up">Catalisadores do Cenário Otimista</div>
+    <div class="body">
+      <span class="arr-up">▲</span> Monetização de IA &amp; dados desbloqueia novas fontes de receita na <strong>Kensho / Market Intelligence</strong><br>
+      <span class="arr-up">▲</span> Recuperação do volume de ratings à medida que os ciclos de M&amp;A e refinanciamento aceleram<br>
+      <span class="arr-up">▲</span> <strong>Negócio de Índices</strong> beneficia do crescimento do AUM em ETFs passivos (comissões recorrentes)<br>
+      <span class="arr-up">▲</span> Commodity Insights — poder de fixação de preços premium na transição energética<br>
+      <span class="arr-up">▲</span> Recompras contínuas (~$4B+ anuais) impulsionam acréscimo do EPS<br>
+      <span class="arr-up">▲</span> Poder de pricing em serviços de dados essenciais — <strong>~76% de receita por subscrição</strong><br>
+      <span class="arr-up">▲</span> Expansão do ROIC à medida que as sinergias da IHS Markit se concretizam integralmente
+    </div>
+  </div>
+  <div class="thesis-card">
+    <div class="thesis-title dn">Riscos do Cenário Pessimista</div>
+    <div class="body">
+      <span class="arr-dn">▼</span> Ciclicidade do volume de ratings — recessão ou restrição de crédito colapsa a emissão de dívida<br>
+      <span class="arr-dn">▼</span> Risco regulatório: <strong>escrutínio do DOJ, reforma de ratings na UE</strong>, separação estrutural<br>
+      <span class="arr-dn">▼</span> Disrupção competitiva por Bloomberg, Refinitiv/LSEG e empresas nativas de IA<br>
+      <span class="arr-dn">▼</span> Dívida líquida $11B+ limita a flexibilidade; subida de taxas aumenta o encargo de juros<br>
+      <span class="arr-dn">▼</span> Risco de execução na integração da IHS Markit — sinergias não totalmente realizadas<br>
+      <span class="arr-dn">▼</span> Abrandamento macro → menos transações de finanças estruturadas &amp; emissão de dívida<br>
+      <span class="arr-dn">▼</span> Cotação já incorpora prémio de qualidade elevado — margem de segurança limitada
+    </div>
+  </div>
+  <div class="thesis-card">
+    <div class="thesis-title eq">Pressupostos Chave &amp; Conclusão</div>
+    <div class="body">
+      <strong>Receita 2025E:</strong> $16,3B · Margem EBITDA: 44,2%<br>
+      <strong>CAGR Receita:</strong> Base 9,0% · Pessimista 5,0% · Otimista 14,0%<br>
+      <strong>Taxa de Imposto:</strong> Base 22% · Pessimista 23% · Otimista 21%<br>
+      <strong>Ritmo de Recompras:</strong> Base 1,5%/ano · Pessimista 0,6% · Otimista 2,5%<br>
+      <strong>WACC:</strong> Base 8,5% · Pessimista 9,5% · Otimista 7,5%<br>
+      <strong>Dívida Líquida:</strong> ~$11,0B (a diminuir com geração de FCF)<br>
+      <strong>Consenso CAGR EPS 5A:</strong> ~9–11% · Yield FCF: 3,3%<br><br>
+      <span class="badge gold">VEREDICTO</span> &nbsp; Razoavelmente valorizado a $505. Alvo base a 12 meses <strong>$540–$570</strong>. Compounder de qualidade com margem de segurança limitada ao preço atual; entrada preferencial abaixo de $475.
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <strong style="color:var(--text-2)">Aviso Legal:</strong> Este modelo de valorização destina-se exclusivamente a fins informativos e educativos. Todas as projeções são estimativas baseadas em informação publicamente disponível e dados de consenso de analistas a maio de 2025. <strong>Não constitui aconselhamento de investimento.</strong>
+  Dados financeiros obtidos a partir de registos SEC da S&amp;P Global, comunicados de resultados e consenso sell-side. NM = Não Significativo. Medidas ajustadas/não-GAAP utilizadas onde consistentes com o reporte da empresa. A SPGI apresenta valor contabilístico tangível negativo devido a ~$47B de goodwill da aquisição da IHS Markit (fev. 2022).
+  Sensibilidade DCF: uma variação de 1% no WACC altera o preço implícito do cenário base em ±$40–55/ação; uma variação de 1× no múltiplo de saída altera o preço implícito em ±$15–20/ação.
+</div>
+<button id="spgi-theme-toggle" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema" style="position:fixed;top:14px;right:14px;z-index:9999;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .15s ease,background-color .25s,color .25s,border-color .25s;font-family:system-ui,-apple-system,'Segoe UI Emoji','Apple Color Emoji',sans-serif;line-height:1;padding:0">☀</button>
+<script>(function(){function apply(t){var b=document.getElementById('spgi-theme-toggle');if(b)b.textContent=t==='dark'?'☀':'☾';}var cur=document.documentElement.getAttribute('data-theme')||'dark';apply(cur);var btn=document.getElementById('spgi-theme-toggle');if(btn){btn.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme')||'dark';var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);apply(n);try{localStorage.setItem('spgi-theme',n)}catch(e){}});btn.addEventListener('mouseenter',function(){btn.style.transform='scale(1.08)'});btn.addEventListener('mouseleave',function(){btn.style.transform='scale(1)'});}})();</script>
+
+
+</body>
+</html>
